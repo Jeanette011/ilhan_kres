@@ -1,0 +1,57 @@
+<?php   
+include("baglantim.php");
+$sorgu=$db->prepare('select *from kullanıcılar');
+$sorgu->execute();
+$personellist=$sorgu->fetchAll(PDO::FETCH_OBJ);
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+#a{text-align:center;font-weight: bold;background-color:#2c3034;color:#4CAF50;;font-size:24px;}
+#b{text-align:center;color:white;}
+.yerles{width: 100%;height:auto;margin-top:150px;position:absolute;}
+.silme_butonu{color:white;text-decoration: none;background-color: red;display:block;width:60px;height:40px;margin:0px auto;padding-top: 20px;border-radius: 15px;font-weight: bold}
+.silme_butonu:hover{background-color:white;color:darkred;box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);}
+</style>
+<body bgcolor="silver">
+<?php   
+include("Baslık.php");
+?>
+<div class="yerles">
+<table border=0 bgcolor="#212529" bordercolor="silver" cellspacing="5" width=100% cellpadding="5">
+<tr>
+        <td id="a">ID <img style="width:25px;height:25px;margin-top:2px" src="ıcon/fingerprint-scan.png"></td>
+        <td id="a">Kullanıcı Adı <img style="width:25px;height:25px;margin-top:2px" src="ıcon/id-cardsad.png"></td>
+        <td id="a">Adı Soyadı <img style="width:25px;height:25px;margin-top:2px" src="ıcon/user.png"></td>
+        <td id="a">Parola <img style="width:25px;height:25px;margin-top:2px" src="ıcon/secure.png"></td>
+        <td id="a">Ünvan <img style="width:25px;height:25px;margin-top:2px" src="ıcon/military-rank.png"></td>
+        <td id="a">Foto <img style="width:25px;height:25px;margin-top:2px" src="ıcon/image.png"></td>
+        <td id="a" >Sil <img style="width:25px;height:25px;margin-top:2px" src="ıcon/Actions-user-group-delete-icon.png"></td>
+        </tr>
+        <?php 
+        foreach($personellist as $person){
+        ?>
+        <tr>
+        <td id="b"><?=$person->id?></td>
+        <td id="b"><?=$person->kullanıcı_adı?></td>
+        <td id="b"><?=$person->ad_soyad?></td>
+        <td id="b"><?=$person->parola?></td>
+        <td id="b"><?=$person->unvan?></td>
+		<td id="b"><img style="width:50px;height:50px;border-radius:50px" src="<?=$person->resmi?>"></td>
+		<td id="b"><a class="silme_butonu" href="yonetici_sil.php?pid=<?=$person->id?>">Sil</a></td>
+         </tr>
+          <?php }?>
+</table>
+</div>
+    </body>
+</html>
+</body>
+</html>
+
+
